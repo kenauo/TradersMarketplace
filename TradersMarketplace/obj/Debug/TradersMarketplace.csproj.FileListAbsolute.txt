@@ -53,3 +53,5 @@ C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\Trader
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace\obj\Debug\TradersMarketplace.csprojResolveAssemblyReference.cache
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace\obj\Debug\TradersMarketplace.dll
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace\obj\Debug\TradersMarketplace.pdb
+C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace\obj\Debug\TradersMarketplace.Migrations.Init.resources
+C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace\obj\Debug\TradersMarketplace.csproj.GenerateResource.Cache

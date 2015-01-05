@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace TradersMarketplace.Models
 {
@@ -6,9 +7,12 @@ namespace TradersMarketplace.Models
     {
         public int ID { get; set; }
         public int SellerID { get; set; }
+        [Required, StringLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Required]
         public int Quantity { get; set; }
+        [Required, DataType(DataType.Currency)]
         public decimal Price { get; set; }
     }
 
