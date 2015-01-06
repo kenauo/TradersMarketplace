@@ -83,7 +83,7 @@ namespace TradersMarketplace.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Seller")]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,SellerID,Name,Description,Quantity,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
