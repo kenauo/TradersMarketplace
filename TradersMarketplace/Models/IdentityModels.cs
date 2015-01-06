@@ -77,10 +77,12 @@ namespace TradersMarketplace.Models
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var user = um.FindById(userId);
-            var currentRoles = new List<IdentityUserRole>();
+            //var currentRoles = new List<IdentityUserRole>();
+            ApplicationDbContext dbContext = new ApplicationDbContext();
+            var currentRoles = dbContext.Roles;
             foreach (var role in currentRoles)
             {
-                um.RemoveFromRole(userId, role.ToString());
+                um.RemoveFromRole(userId, role.Name);
             }
             
         }
