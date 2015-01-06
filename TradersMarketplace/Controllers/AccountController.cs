@@ -135,12 +135,22 @@ namespace TradersMarketplace.Controllers
                     }
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Details(string id, ManageMessageId? Message = null)
+        {
+            var Db = new ApplicationDbContext();
+            var user = Db.Users.First(u => u.UserName == id);
+            var model = new EditUserViewModel(user);
+            ViewBag.MessageId = Message;
             return View(model);
         }
 
