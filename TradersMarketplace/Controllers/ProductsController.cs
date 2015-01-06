@@ -36,7 +36,7 @@ namespace TradersMarketplace.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +47,7 @@ namespace TradersMarketplace.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult Create([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
         {
             product.SellerID = User.Identity.Name;
@@ -61,6 +62,7 @@ namespace TradersMarketplace.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,6 +82,7 @@ namespace TradersMarketplace.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult Edit([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
         {
             if (ModelState.IsValid)
@@ -92,6 +95,7 @@ namespace TradersMarketplace.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,6 +113,7 @@ namespace TradersMarketplace.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Seller")]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);

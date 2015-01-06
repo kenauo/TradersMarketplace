@@ -26,7 +26,7 @@ namespace TradersMarketplace.Controllers
             SignInManager = signInManager;
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var Db = new ApplicationDbContext();
@@ -144,7 +144,7 @@ namespace TradersMarketplace.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id, ManageMessageId? Message = null)
         {
             var Db = new ApplicationDbContext();
@@ -155,7 +155,7 @@ namespace TradersMarketplace.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EditUserViewModel model)
         {
@@ -175,7 +175,7 @@ namespace TradersMarketplace.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id = null)
         {
             var Db = new ApplicationDbContext();
@@ -190,7 +190,7 @@ namespace TradersMarketplace.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(string id)
         {
             var Db = new ApplicationDbContext();
@@ -210,7 +210,7 @@ namespace TradersMarketplace.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult UserRoles(SelectUserRolesViewModel model)
         {
