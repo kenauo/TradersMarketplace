@@ -6,7 +6,8 @@ namespace TradersMarketplace.Models
     public class Product
     {
         public int ID { get; set; }
-        public int SellerID { get; set; }
+        [Display(Name="Seller"), StringLength(256)]
+        public string SellerID { get; set; }
         [Required, StringLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }

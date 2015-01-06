@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TradersMarketplace.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TradersMarketplace.Controllers
 {
@@ -48,9 +49,9 @@ namespace TradersMarketplace.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
         {
+            product.SellerID = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                product.SellerID = 1;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
