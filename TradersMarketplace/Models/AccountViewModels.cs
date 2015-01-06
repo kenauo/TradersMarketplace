@@ -55,6 +55,9 @@ namespace TradersMarketplace.Models
         [EmailAddress]
         public string Email { get; set; }
 
+        [Display(Name = "Account Type")]
+        public string AccountType { get; set; }
+
         public ApplicationUser GetUser()
         {
             var user = new ApplicationUser()
@@ -62,7 +65,7 @@ namespace TradersMarketplace.Models
                 UserName = this.Username,
                 FirstName = this.FirstName,
                 LastName = this.LastName,
-                Email = this.Email,
+                Email = this.Email
             };
             return user;
         }

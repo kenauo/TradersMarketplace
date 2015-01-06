@@ -124,6 +124,16 @@ namespace TradersMarketplace.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var idManager = new IdentityManager();
+                    var Db = new ApplicationDbContext();
+                    var userRole = Db.Users.First(u => u.UserName == model.Username);
+                    idManager.AddUserToRole(userRole.Id, "Buyer");
+
+                    if (model.AccountType == "Seller")
+                    {
+                         idManager.AddUserToRole(userRole.Id, "Seller");
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     return RedirectToAction("Index", "Account");
                 }
