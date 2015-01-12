@@ -8,17 +8,28 @@ using System.Web;
 using System.Web.Mvc;
 using TradersMarketplace.Models;
 using Microsoft.AspNet.Identity;
+using TradersMarketplace.DAL;
 
 namespace TradersMarketplace.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProductDBContext db = new ProductDBContext();
+        private IProductRepository productRepository;
+
+        public ProductsController()
+        {
+            this.productRepository = new ProductRepository(new ProductDBContext());
+        }
+
+        public ProductsController(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
 
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(productRepository.GetProducts());
         }
 
         // GET: Products/Details/5
@@ -28,7 +39,7 @@ namespace TradersMarketplace.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetProductByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -42,9 +53,7 @@ namespace TradersMarketplace.Controllers
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Seller")]
@@ -53,15 +62,14 @@ namespace TradersMarketplace.Controllers
             product.SellerID = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+                productRepository.InsertProduct(product);
+                productRepository.Save();
                 return RedirectToAction("Index");
             }
 
             return View(product);
         }
 
-        // GET: Products/Edit/5
         [Authorize(Roles = "Admin, Seller")]
         public ActionResult Edit(int? id)
         {
@@ -69,7 +77,7 @@ namespace TradersMarketplace.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetProductByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -77,9 +85,6 @@ namespace TradersMarketplace.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Seller")]
@@ -87,14 +92,13 @@ namespace TradersMarketplace.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                productRepository.UpdateProduct(product);
+                productRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(product);
         }
 
-        // GET: Products/Delete/5
         [Authorize(Roles = "Admin, Seller")]
         public ActionResult Delete(int? id)
         {
@@ -102,7 +106,7 @@ namespace TradersMarketplace.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = productRepository.GetProductByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -110,15 +114,14 @@ namespace TradersMarketplace.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Seller")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            Product product = productRepository.GetProductByID(id);
+            productRepository.DeleteProduct(id);
+            productRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +129,7 @@ namespace TradersMarketplace.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                productRepository.Dispose();
             }
             base.Dispose(disposing);
         }
