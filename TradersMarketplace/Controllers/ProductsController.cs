@@ -59,7 +59,6 @@ namespace TradersMarketplace.Controllers
         [Authorize(Roles = "Admin, Seller")]
         public ActionResult Create([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
         {
-            product.SellerID = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 productRepository.InsertProduct(product);
@@ -88,7 +87,7 @@ namespace TradersMarketplace.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Seller")]
-        public ActionResult Edit([Bind(Include = "ID,SellerID,Name,Description,Quantity,Price")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,Quantity,Price")] Product product)
         {
             if (ModelState.IsValid)
             {

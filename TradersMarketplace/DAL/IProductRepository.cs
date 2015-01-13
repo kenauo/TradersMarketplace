@@ -10,7 +10,7 @@ namespace TradersMarketplace.DAL
     {
         IEnumerable<Product> GetProducts();
         Product GetProductByID(int? productId);
-        void InsertProduct(Product product);
+        Product InsertProduct(Product product);
         void DeleteProduct(int productID);
         void UpdateProduct(Product product);
         void Save();

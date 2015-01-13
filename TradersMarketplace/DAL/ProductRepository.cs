@@ -9,7 +9,13 @@ namespace TradersMarketplace.DAL
 {
     public class ProductRepository : IProductRepository, IDisposable
     {
-         private ProductDBContext context;
+        private ProductDBContext context;
+
+        public ProductDBContext Context
+        {
+            get { return context; }
+            set { context = value; }
+        }
 
          public ProductRepository(ProductDBContext context)
         {
@@ -26,9 +32,9 @@ namespace TradersMarketplace.DAL
             return context.Products.Find(id);
         }
 
-         public void InsertProduct(Product product)
+         public Product InsertProduct(Product product)
         {
-            context.Products.Add(product);
+            return context.Products.Add(product);
         }
 
         public void DeleteProduct(int productID)

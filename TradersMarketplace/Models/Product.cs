@@ -7,8 +7,6 @@ namespace TradersMarketplace.Models
     public class Product
     {
         public int ID { get; set; }
-        [Display(Name="Seller"), StringLength(256)]
-        public string SellerID { get; set; }
         [Required, StringLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -16,6 +14,31 @@ namespace TradersMarketplace.Models
         public int Quantity { get; set; }
         [Required, DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Product)
+            {
+                Product compareProduct = (Product)obj;
+
+                if (compareProduct.ID == this.ID &&
+                    compareProduct.Name == this.Name &&
+                    compareProduct.Description == this.Description &&
+                    compareProduct.Quantity == this.Quantity &&
+                    compareProduct.Price == this.Price)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+        }
     }
 
     public class ProductDBContext : DbContext

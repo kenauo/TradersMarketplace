@@ -40,3 +40,5 @@ C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\Trader
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace.Tests\obj\Debug\TradersMarketplace.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace.Tests\obj\Debug\TradersMarketplace.Tests.dll
 C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace.Tests\obj\Debug\TradersMarketplace.Tests.pdb
+C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace.Tests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kenneth\Documents\Degree\Software Engineering\TradersMarketplace\TradersMarketplace.Tests\bin\Debug\EntityFramework.SqlServer.xml
