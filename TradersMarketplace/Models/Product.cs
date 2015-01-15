@@ -22,7 +22,8 @@ namespace TradersMarketplace.Models
             {
                 Product compareProduct = (Product)obj;
 
-                if (compareProduct.ID == this.ID &&
+                if (//compareProduct.ID != this.ID &&
+                    compareProduct.ID != this.ID &&
                     compareProduct.Name == this.Name &&
                     compareProduct.Description == this.Description &&
                     compareProduct.Quantity == this.Quantity &&

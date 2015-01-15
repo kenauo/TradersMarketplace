@@ -34,7 +34,8 @@ namespace TradersMarketplace.DAL
              {
                  throw new ArgumentNullException();
              }
-             return product;
+             return null;
+             //return product;
          }
 
          public Product InsertProduct(Product product)
@@ -45,7 +46,7 @@ namespace TradersMarketplace.DAL
         public void DeleteProduct(int productID)
         {
             Product student = context.Products.Find(productID);
-            context.Products.Remove(student);
+            //context.Products.Remove(student);
         }
 
         public void UpdateProduct(Product product)
