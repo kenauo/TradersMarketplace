@@ -28,14 +28,19 @@ namespace TradersMarketplace.DAL
         }
 
          public Product GetProductByID(int? id)
-        {
-            return context.Products.Find(id);
-        }
+         {
+             Product product = context.Products.Find(id);
+             if (product == null)
+             {
+                 throw new ArgumentNullException();
+             }
+             return product;
+         }
 
          public Product InsertProduct(Product product)
-        {
-            return context.Products.Add(product);
-        }
+         {
+             return context.Products.Add(product);
+         }
 
         public void DeleteProduct(int productID)
         {

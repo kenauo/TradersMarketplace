@@ -10,9 +10,10 @@ namespace TradersMarketplace.Models
         [Required, StringLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
+        [Required, Range(0, int.MaxValue, ErrorMessage= "Quantity must not be negative.")]
         public int Quantity { get; set; }
-        [Required, DataType(DataType.Currency)]
+        [Required, DataType(DataType.Currency),
+        Range(0, double.MaxValue, ErrorMessage= "Price must not be negative.")]
         public decimal Price { get; set; }
 
         public override bool Equals(object obj)
