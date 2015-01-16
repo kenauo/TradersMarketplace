@@ -163,6 +163,10 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="DAL\IProductRepository.cs" />
     <Compile Include="DAL\ProductRepository.cs" />
+    <Compile Include="Decorator\AdvancedSearchComponent.cs" />
+    <Compile Include="Decorator\AdvancedSearchDecorator.cs" />
+    <Compile Include="Decorator\ByNumberSearch.cs" />
+    <Compile Include="Decorator\ByStringSearch.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

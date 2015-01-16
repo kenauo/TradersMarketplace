@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TradersMarketplace.Models;
 using Microsoft.AspNet.Identity;
 using TradersMarketplace.DAL;
+using TradersMarketplace.Decorator;
 
 namespace TradersMarketplace.Controllers
 {
@@ -27,9 +28,37 @@ namespace TradersMarketplace.Controllers
         }
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(String Name, String Description, 
+            int? Quantity, string QuantityType, Decimal? Price, string PriceType)
         {
-            return View(productRepository.GetProducts());
+            IEnumerable<Product> products = productRepository.GetProducts();
+            List<Product> productList = new List<Product>();
+            productList.AddRange(products);
+
+            ViewBag.QuantityType = new SelectList(new string[]{">", "=", "<"});
+            ViewBag.PriceType = new SelectList(new string[] { ">", "=", "<" });
+
+            AdvancedSearchDecorator search =
+                new ByStringSearch("Name")
+                {
+                    SearchString = Name,
+                    AdvancedSearchComponent =
+                    new ByStringSearch("Description")
+                    {
+                        SearchString = Description,
+                        AdvancedSearchComponent = new ByNumberSearch("Quantity")
+                        {
+                            SearchNumber = Quantity,
+                            SearchType = QuantityType,
+                            AdvancedSearchComponent = new ByNumberSearch("Price") { 
+                                SearchNumber = Price,
+                                SearchType = PriceType
+                            }
+                        }
+                    }
+                };
+
+            return View(search.Search(productList));
         }
 
         // GET: Products/Details/5

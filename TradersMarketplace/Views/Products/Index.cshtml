@@ -8,6 +8,16 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    {
+    <p>
+        Name: @Html.TextBox("Name")
+        Description: @Html.TextBox("Description")
+        Quantity: @Html.DropDownList("QuantityType") @Html.TextBox("Quantity")
+        Price: @Html.DropDownList("PriceType") @Html.TextBox("Price")
+        <input type="submit" value="Filter" />
+    </p>
+    }
 </p>
 <table class="table">
     <tr>
